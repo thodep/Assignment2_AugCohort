@@ -169,7 +169,7 @@ func sing(songName:String = "All about the Bass"){
 print("Please sing \(songName) song")
 }
 sing()
-sing(songName:"hey")
+sing(songName: "hey")
 /*:
 
 ## Variadic Parameters
@@ -295,6 +295,24 @@ I’m not going to get too much into generics in this assignment, but here is a 
 * number1 // 5
 * number2 // 2
 */
+func swapValue<T>(inout value1:T, inout value2:T){
+let oldValue1 = value1
+    value1 = value2
+    value2 = oldValue1
+}
+var pet1 = "Elephant"
+var pet2 = "Mouse"
+swapValue(&pet1, &pet2)
+pet1
+pet2
+
+var number1 = 199
+var number2 = 333
+
+swapValue(&number1, &number2)
+number1
+
+
 
 /*:
 ## Variable Parameters
@@ -320,8 +338,14 @@ name
 Note that this is different than an inout parameter — variable parameters do not change the external passed-in variable!
 
 */
-
-
+var name = "Dang Bao Tho"
+func appendNumbersToName(var name: String, var MaxNumber: Int) -> String {
+    for i in 0..<MaxNumber{
+        name += String(i+1)
+    }
+    return name
+}
+appendNumbersToName(name,10)
 /*:
 
 ## Functions as Parameters
@@ -340,6 +364,13 @@ Note that this is different than an inout parameter — variable parameters do n
 * // Mr. Bryan, your lucky number is 38
 
 */
+func luckyNumberForMe(name:String,#lotteryNumber:(String,Int)->String)->String{
+let randomNumber = Int(arc4random() % 100)
+ return lotteryNumber(name,randomNumber)
+}
+func lotteryNumberHandler(name:String, theNumber: Int)-> String{
+return "\(name), your lucky number is \(theNumber)"
+}
 
 
 /*:
